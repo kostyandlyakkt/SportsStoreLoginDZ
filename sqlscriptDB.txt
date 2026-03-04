@@ -1,0 +1,50 @@
+CREATE TABLE Users (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Email NVARCHAR(255) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(255) NOT NULL,
+    Role NVARCHAR(50) NOT NULL DEFAULT 'User',
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    LastLogin DATETIME NULL
+);
+
+CREATE TABLE Categories (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL UNIQUE,
+    Description NVARCHAR(255) NULL
+);
+
+CREATE TABLE Products (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(200) NOT NULL,
+    CategoryId INT NOT NULL,
+    Price DECIMAL(18,2) NOT NULL,
+    Quantity INT NOT NULL,
+    Status NVARCHAR(50) NOT NULL CHECK (Status IN ('В наличии', 'Мало', 'Нет в наличии')),
+    AddedDate DATETIME NOT NULL DEFAULT GETDATE(),
+    Manufacturer NVARCHAR(100) NULL,
+    Article NVARCHAR(50) NULL UNIQUE,
+    Description NVARCHAR(MAX) NULL,
+    Weight DECIMAL(10,2) NULL,
+    Size NVARCHAR(50) NULL,
+    Color NVARCHAR(50) NULL,
+    Material NVARCHAR(100) NULL,
+    CONSTRAINT FK_Products_Category FOREIGN KEY (CategoryId) REFERENCES Categories(Id) ON DELETE CASCADE
+);
+
+USE StoreDB;
+
+INSERT INTO Users (Email, PasswordHash, Role)
+VALUES 
+('admin@admin.ru', 'admin123', 'Admin');
+
+INSERT INTO Categories (Name, Description)
+VALUES 
+(N'Смартфоны', N'Мобильные телефоны и аксессуары'),
+(N'Ноутбуки', N'Переносные компьютеры для работы и игр'),
+(N'Аксессуары', N'Чехлы, кабели и прочие мелочи');
+
+INSERT INTO Products (Name, CategoryId, Price, Quantity, Status, Manufacturer, Article, Color)
+VALUES 
+(N'iPhone 15 Pro', 1, 120000.00, 15, N'В наличии', N'Apple', N'APP-IPH-15P', N'Titanium'),
+(N'MacBook Air M2', 2, 145000.00, 3, N'Мало', N'Apple', N'APP-MAC-M2', N'Space Gray'),
+(N'Зарядное устройство USB-C', 3, 2500.00, 0, N'Нет в наличии', N'Samsung', N'SAM-PWR-25W', N'White');
