@@ -18,9 +18,10 @@ namespace SportsStoreLogin
     {
         private StoreDBEntities1 db = new StoreDBEntities1();
 
-        public DataGrid()
+        public DataGrid(String username = "Администратор")
         {
             InitializeComponent();
+            txtUsername.Text = username;
             LoadData();
         }
 
@@ -65,6 +66,46 @@ namespace SportsStoreLogin
             productWindow.Show();
 
             this.Close();
+        }
+
+        private void btnDeleteProduct_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItem = dgProducts.SelectedItem;
+            if (selectedItem == null)
+            {
+                MessageBox.Show("Пожалуйста, выберите товар для удаления.");
+                return;
+            }
+
+            dynamic product = selectedItem;
+            int productId = product.Id;
+
+            var result = MessageBox.Show($"Вы уверены, что хотите удалить товар с ID {productId}?",
+                                         "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    var productToDelete = db.Products.Find(productId);
+                    if (productToDelete != null)
+                    {
+                        db.Products.Remove(productToDelete);
+                        db.SaveChanges();
+                        LoadData();
+                        MessageBox.Show("Товар успешно удален.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка при удалении: " + ex.Message);
+                }
+            }
+        }
+
+        private void btnEditProduct_Click(object sender, RoutedEventArgs e)
+        {
+            return;
         }
     }
 }

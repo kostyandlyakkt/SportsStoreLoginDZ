@@ -60,7 +60,7 @@ namespace SportsStoreLogin
                     MessageBox.Show($"Добро пожаловать, {user.Email}!", "Успех",
                         MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    DataGrid dataGridWin = new DataGrid();
+                    DataGrid dataGridWin = new DataGrid(user.Email);
 
                     dataGridWin.Show();
 

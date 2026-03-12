@@ -56,7 +56,9 @@ namespace SportsStoreLogin
                 Users newUser = new Users
                 {
                     Email = email,
-                    PasswordHash = password
+                    PasswordHash = password,
+                    Role = "admin",
+                    CreatedAt = DateTime.Now,
                 };
 
                 db.Users.Add(newUser);

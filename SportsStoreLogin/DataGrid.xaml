@@ -119,7 +119,8 @@
 
                                    Foreground="#666"
 
-                                   Margin="0,0,10,0"/>
+                                   Margin="0,0,10,0"
+                                   x:Name="txtUsername"/>
 
                         <Button Content="Выйти" 
 
@@ -229,7 +230,8 @@
 
                                     BorderThickness="0"
 
-                                    Cursor="Hand">
+                                    Cursor="Hand"
+                                    Click="btnEditProduct_Click">
 
                                 <Button.Resources>
 
@@ -257,7 +259,8 @@
 
                                     BorderThickness="0"
 
-                                    Cursor="Hand">
+                                    Cursor="Hand"
+                                    Click="btnDeleteProduct_Click">
 
                                 <Button.Resources>
 

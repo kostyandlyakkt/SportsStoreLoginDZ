@@ -97,14 +97,7 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-
-                <TextBlock x:Name="txtError"
-                    Text="" 
-                    FontWeight="SemiBold"
-                    Foreground="red"/>
-
-
-
+                
                 <!-- Ссылка на регистрацию -->
                 <TextBlock HorizontalAlignment="Center" FontSize="13" Height="22">
     <Run Text="Нет аккаунта?" Foreground="#333333"/>
@@ -114,14 +107,10 @@
                 </TextBlock>
 
                 <!-- Блок для отображения ошибок -->
-                <Border x:Name="errorBorder" 
-                        Background="#FFEBEE" 
-                        CornerRadius="5" 
-                        Padding="10"
-                        Visibility="Collapsed"
-                        BorderBrush="#FFCDD2"
-                        BorderThickness="1">
-                </Border>
+                <TextBlock x:Name="txtError"
+                    Text="" 
+                    FontWeight="SemiBold"
+                    Foreground="red"/>
 
                 <!-- Индикатор загрузки -->
                 <Border x:Name="loadingBorder" 
