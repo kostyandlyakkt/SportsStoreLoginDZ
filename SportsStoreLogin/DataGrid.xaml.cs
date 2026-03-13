@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,10 +54,10 @@ namespace SportsStoreLogin
 
         public void btnExit_Click(object sender, RoutedEventArgs e)
         {
+            File.Delete(LoginWindow.GetSessionFilePath());
+
             LoginWindow loginWin = new LoginWindow();
-
             loginWin.Show();
-
             this.Close();
         }
 
@@ -106,6 +108,33 @@ namespace SportsStoreLogin
         private void btnEditProduct_Click(object sender, RoutedEventArgs e)
         {
             return;
+        }
+    }
+
+    public class StatusToColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string status = value as string;
+
+            if (status == "В наличии")
+            {
+                return new SolidColorBrush(Color.FromRgb(76, 175, 80));
+            }
+            else if (status == "Мало")
+            {
+                return new SolidColorBrush(Color.FromRgb(255, 193, 7));
+            }
+            else if (status == "Нет в наличии")
+            {
+                return new SolidColorBrush(Color.FromRgb(244, 67, 54));
+            }
+            return Brushes.Gray;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
         }
     }
 }

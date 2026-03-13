@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SportsStoreLogin"
         Title="Авторизация - Спортивный магазин" 
-        Height="450" Width="400"
+        Height="500" Width="400"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     <Window.Background>
@@ -14,13 +14,11 @@
             <GradientStop Color="#FF2A5298" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
-
     <Grid>
         <Border Background="White" 
                 CornerRadius="10" 
                 Margin="30"
                 VerticalAlignment="Center">
-
             <StackPanel Margin="20">
                 <!-- Заголовок -->
                 <TextBlock Text="ВХОД В СИСТЕМУ" 
@@ -28,7 +26,6 @@
                            FontWeight="Bold" 
                            HorizontalAlignment="Center"
                            Foreground="#1E3C72"/>
-
                 <!-- Логотип спортивного магазина -->
                 <StackPanel HorizontalAlignment="Center">
                     <Ellipse Width="80" Height="80" Stroke="#1E3C72" StrokeThickness="2">
@@ -46,12 +43,12 @@
                                Margin="0,5,0,0"
                                Foreground="#1E3C72"/>
                 </StackPanel>
-
                 <!-- Поле для логина -->
                 <StackPanel>
                     <TextBlock Text="Логин (email):" 
                                FontWeight="SemiBold"
-                               Foreground="#333"/>
+                               Foreground="#333"
+                               Margin="0,15,0,0"/>
                     <TextBox x:Name="txtUsername" 
                              Height="35" 
                              FontSize="14"
@@ -60,12 +57,12 @@
                              BorderThickness="1"
                              Background="#FAFAFA"/>
                 </StackPanel>
-
                 <!-- Поле для пароля -->
                 <StackPanel>
                     <TextBlock Text="Пароль:" 
                                FontWeight="SemiBold"
-                               Foreground="#333"/>
+                               Foreground="#333"
+                               Margin="0,5,0,0"/>
                     <PasswordBox x:Name="txtPassword" 
                                  Height="35" 
                                  FontSize="14"
@@ -74,12 +71,11 @@
                                  BorderThickness="1"
                                  Background="#FAFAFA"/>
                 </StackPanel>
-
                 <!-- Чекбокс "Запомнить меня" -->
                 <CheckBox x:Name="chkRemember" 
                           Content="Запомнить меня"
-                          FontSize="13"/>
-
+                          FontSize="13"
+                          Margin="0,15,0,5"/>
                 <!-- Кнопка входа -->
                 <Button x:Name="btnLogin" 
                         Content="ВОЙТИ" 
@@ -90,14 +86,14 @@
                         Foreground="White"
                         BorderThickness="0"
                         Cursor="Hand"
-                        Click="btnLogin_Click">
+                        Click="btnLogin_Click"
+                        Margin="0,0,0,5">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </Button.Resources>
                 </Button>
-                
                 <!-- Ссылка на регистрацию -->
                 <TextBlock HorizontalAlignment="Center" FontSize="13" Height="22">
     <Run Text="Нет аккаунта?" Foreground="#333333"/>
@@ -105,13 +101,11 @@
         Зарегистрироваться
     </Hyperlink>
                 </TextBlock>
-
                 <!-- Блок для отображения ошибок -->
                 <TextBlock x:Name="txtError"
                     Text="" 
                     FontWeight="SemiBold"
                     Foreground="red"/>
-
                 <!-- Индикатор загрузки -->
                 <Border x:Name="loadingBorder" 
                         Background="#E3F2FD" 

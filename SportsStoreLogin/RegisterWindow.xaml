@@ -14,13 +14,11 @@
             <GradientStop Color="#FF2A5298" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
-
     <Grid>
         <Border Background="White" 
                 CornerRadius="10" 
                 Margin="30"
                 VerticalAlignment="Center">
-
             <StackPanel Margin="20">
                 <!-- Заголовок -->
                 <TextBlock Text="РЕГИСТРАЦИЯ В СИСТЕМЕ" 
@@ -28,7 +26,6 @@
                            FontWeight="Bold" 
                            HorizontalAlignment="Center"
                            Foreground="#1E3C72"/>
-
                 <!-- Логотип спортивного магазина -->
                 <StackPanel HorizontalAlignment="Center">
                     <Ellipse Width="80" Height="80" Stroke="#1E3C72" StrokeThickness="2">
@@ -46,12 +43,12 @@
                                Margin="0,5,0,0"
                                Foreground="#1E3C72"/>
                 </StackPanel>
-
                 <!-- Поле для логина -->
                 <StackPanel>
                     <TextBlock Text="Логин (email):" 
                                FontWeight="SemiBold"
-                               Foreground="#333"/>
+                               Foreground="#333"
+                               Margin="0,15,0,0"/>
                     <TextBox x:Name="txtRegUsername" 
                              Height="35" 
                              FontSize="14"
@@ -60,23 +57,20 @@
                              BorderThickness="1"
                              Background="#FAFAFA"/>
                 </StackPanel>
-
                 <!-- Поле для пароля -->
                 <StackPanel>
                     <TextBlock Text="Пароль:" 
                                FontWeight="SemiBold"
-                               Foreground="#333"/>
+                               Foreground="#333"
+                               Margin="0,5,0,0"/>
                     <PasswordBox x:Name="txtRegPassword" 
                                  Height="35" 
                                  FontSize="14"
-                                 Padding="10,0"
                                  BorderBrush="#CCCCCC"
                                  BorderThickness="1"
-                                 Background="#FAFAFA"/>
+                                 Background="#FAFAFA"
+                                 Padding="10,0"/>
                 </StackPanel>
-
-
-
                 <!-- Кнопка входа -->
                 <Button x:Name="btnLogin" 
                         Content="ЗАРЕГЕСТРИРОВАТЬСЯ" 
@@ -87,14 +81,14 @@
                         Foreground="White"
                         BorderThickness="0"
                         Cursor="Hand"
-                        Click="btnRegister_Click">
+                        Click="btnRegister_Click"
+                        Margin="0,20,0,0">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </Button.Resources>
                 </Button>
-
                 <!-- Блок для отображения ошибок -->
                 <Border x:Name="errorBorder" 
                         Background="#FFEBEE" 
@@ -111,7 +105,6 @@
                                    FontSize="13"/>
                     </StackPanel>
                 </Border>
-
                 <!-- Индикатор загрузки -->
                 <Border x:Name="loadingBorder" 
                         Background="#E3F2FD" 

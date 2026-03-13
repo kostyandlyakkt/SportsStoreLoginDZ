@@ -16,7 +16,6 @@ namespace SportsStoreLogin
 {
     public partial class RegisterWindow : Window
     {
-        // Инициализируем контекст базы данных
         private StoreDBEntities1 db = new StoreDBEntities1();
 
         public RegisterWindow()
