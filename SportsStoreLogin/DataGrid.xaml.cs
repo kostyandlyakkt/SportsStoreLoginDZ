@@ -48,7 +48,7 @@ namespace SportsStoreLogin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка загрузки данных: " + ex.Message);
+                Message.ShowError($"Ошибка загрузки данных: {ex.Message}");
             }
         }
 
@@ -64,9 +64,7 @@ namespace SportsStoreLogin
         public void btnAddProduct_Click(object sender, RoutedEventArgs e)
         {
             ProductWindow productWindow = new ProductWindow();
-
             productWindow.Show();
-
             this.Close();
         }
 
@@ -75,7 +73,7 @@ namespace SportsStoreLogin
             var selectedItem = dgProducts.SelectedItem;
             if (selectedItem == null)
             {
-                MessageBox.Show("Пожалуйста, выберите товар для удаления.");
+                Message.ShowWarn("Выберите товар для удаления");
                 return;
             }
 
@@ -95,19 +93,32 @@ namespace SportsStoreLogin
                         db.Products.Remove(productToDelete);
                         db.SaveChanges();
                         LoadData();
-                        MessageBox.Show("Товар успешно удален.");
+
+                        Message.ShowInfo("Товар успешно удален");
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ошибка при удалении: " + ex.Message);
+                    Message.ShowError($"Ошибка при удалении: {ex.Message}");
                 }
             }
         }
 
         private void btnEditProduct_Click(object sender, RoutedEventArgs e)
         {
-            return;
+            var selectedItem = dgProducts.SelectedItem;
+            if (selectedItem == null)
+            {
+                Message.ShowWarn("Выберите товар для редактирования");
+                return;
+            }
+
+            dynamic product = selectedItem;
+            int productId = product.Id;
+
+            ProductWindow editWin = new ProductWindow(productId);
+            editWin.Show();
+            this.Close();
         }
     }
 

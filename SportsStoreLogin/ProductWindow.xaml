@@ -1,12 +1,14 @@
 ﻿<Window x:Class="SportsStoreLogin.ProductWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SportsStoreLogin"
         Title="{Binding WindowTitle}" 
         Height="650" Width="700"
-        WindowStartupLocation="CenterOwner"
-        WindowStyle="None"
-        AllowsTransparency="False" 
+        WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
+
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#FF1E3C72" Offset="0"/>
@@ -100,8 +102,7 @@
                                              Padding="10"
                                              BorderBrush="#DDD"
                                              BorderThickness="1"
-                                             Background="White"
-                                             Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}">
+                                             Background="White">
                                         <TextBox.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value="5"/>
@@ -123,8 +124,7 @@
                                         <ComboBox x:Name="cmbCategory" 
                                                   Height="40"
                                                   BorderBrush="#DDD"
-                                                  Background="White"
-                                                  Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}">
+                                                  Background="White">
                                             <ComboBox.Resources>
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="5"/>
@@ -146,8 +146,7 @@
                                                  Padding="10"
                                                  BorderBrush="#DDD"
                                                  BorderThickness="1"
-                                                 Background="White"
-                                                 Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}">
+                                                 Background="White">
                                             <TextBox.Resources>
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="5"/>
@@ -172,8 +171,7 @@
                                                  Padding="10"
                                                  BorderBrush="#DDD"
                                                  BorderThickness="1"
-                                                 Background="White"
-                                                 Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}">
+                                                 Background="White">
                                             <TextBox.Resources>
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="5"/>
@@ -188,8 +186,7 @@
                                         <ComboBox x:Name="cmbStatus" 
                                                   Height="40"
                                                   BorderBrush="#DDD"
-                                                  Background="White"
-                                                  SelectedValue="{Binding Status}">
+                                                  Background="White">
                                             <ComboBox.Resources>
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="5"/>
@@ -236,8 +233,7 @@
                                              Padding="10"
                                              BorderBrush="#DDD"
                                              BorderThickness="1"
-                                             Background="White"
-                                             Text="{Binding Manufacturer}">
+                                             Background="White">
                                         <TextBox.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value="5"/>
@@ -255,8 +251,7 @@
                                              Padding="10"
                                              BorderBrush="#DDD"
                                              BorderThickness="1"
-                                             Background="White"
-                                             Text="{Binding Article}">
+                                             Background="White">
                                         <TextBox.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value="5"/>
@@ -276,8 +271,7 @@
                                              BorderThickness="1"
                                              Background="White"
                                              TextWrapping="Wrap"
-                                             AcceptsReturn="True"
-                                             Text="{Binding Description}">
+                                             AcceptsReturn="True">
                                         <TextBox.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value="5"/>
@@ -314,8 +308,7 @@
                                                  Padding="10"
                                                  BorderBrush="#DDD"
                                                  BorderThickness="1"
-                                                 Background="White"
-                                                 Text="{Binding Weight}">
+                                                 Background="White">
                                             <TextBox.Resources>
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="5"/>
@@ -332,8 +325,7 @@
                                                  Padding="10"
                                                  BorderBrush="#DDD"
                                                  BorderThickness="1"
-                                                 Background="White"
-                                                 Text="{Binding Size}">
+                                                 Background="White">
                                             <TextBox.Resources>
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="5"/>
@@ -358,8 +350,7 @@
                                                  Padding="10"
                                                  BorderBrush="#DDD"
                                                  BorderThickness="1"
-                                                 Background="White"
-                                                 Text="{Binding Color}">
+                                                 Background="White">
                                             <TextBox.Resources>
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="5"/>
@@ -376,8 +367,7 @@
                                                  Padding="10"
                                                  BorderBrush="#DDD"
                                                  BorderThickness="1"
-                                                 Background="White"
-                                                 Text="{Binding Material}">
+                                                 Background="White">
                                             <TextBox.Resources>
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="5"/>

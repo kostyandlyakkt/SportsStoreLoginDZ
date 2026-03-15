@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SportsStoreLogin"
         Title="Авторизация - Спортивный магазин" 
-        Height="450" Width="400"
+        Height="500" Width="400"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     <Window.Background>
@@ -72,7 +72,7 @@
                                  Padding="10,0"/>
                 </StackPanel>
                 <!-- Кнопка входа -->
-                <Button x:Name="btnLogin" 
+                <Button x:Name="btnRegister" 
                         Content="ЗАРЕГЕСТРИРОВАТЬСЯ" 
                         Height="40" 
                         FontSize="16" 
@@ -89,22 +89,12 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                <!-- Блок для отображения ошибок -->
-                <Border x:Name="errorBorder" 
-                        Background="#FFEBEE" 
-                        CornerRadius="5" 
-                        Padding="10"
-                        Visibility="Collapsed"
-                        BorderBrush="#FFCDD2"
-                        BorderThickness="1">
-                    <StackPanel>
-                        <TextBlock x:Name="txtError" 
-                                   Text="" 
-                                   Foreground="#D32F2F"
-                                   TextWrapping="Wrap"
-                                   FontSize="13"/>
-                    </StackPanel>
-                </Border>
+                <TextBlock HorizontalAlignment="Center" FontSize="13" Height="22">
+<Run Text="Есть аккаунт?" Foreground="#333333"/>
+<Hyperlink Click="Hyperlink_Click" Foreground="#1E3C72" FontWeight="Bold">
+    Войти
+</Hyperlink>
+                </TextBlock>
                 <!-- Индикатор загрузки -->
                 <Border x:Name="loadingBorder" 
                         Background="#E3F2FD" 

@@ -19,9 +19,6 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace SportsStoreLogin
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class LoginWindow : Window
     {
         private StoreDBEntities1 db = new StoreDBEntities1();
@@ -38,11 +35,6 @@ namespace SportsStoreLogin
             await login(txtUsername.Text, txtPassword.Password);
         }
 
-        private void ShowError(string message)
-        {
-            txtError.Text = message;
-            txtError.Visibility = Visibility.Visible;
-        }
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
             RegisterWindow registerWin = new RegisterWindow();
@@ -60,13 +52,22 @@ namespace SportsStoreLogin
 
                 if (string.IsNullOrWhiteSpace(userEmail))
                 {
-                    ShowError("Введите email");
+                    Message.ShowError("Введите email");
+                    _cts.Cancel();
+                    return;
+                }
+
+                if (!Validation.IsValidEmail(userEmail))
+                {
+                    Message.ShowError("Введите корректный email");
+                    _cts.Cancel();
                     return;
                 }
 
                 if (userPassword == "")
                 {
-                    ShowError("Введите пароль");
+                    Message.ShowError("Введите пароль");
+                    _cts.Cancel();
                     return;
                 }
 
@@ -74,7 +75,8 @@ namespace SportsStoreLogin
 
                 if (user == null)
                 {
-                    ShowError("Пользователь не найден");
+                    Message.ShowError("Пользователь не найден");
+                    _cts.Cancel();
                     return;
                 }
 
@@ -86,23 +88,32 @@ namespace SportsStoreLogin
                     }
 
                     _cts.Cancel();
+                    user.LastLogin = DateTime.Now;
+                    db.SaveChanges();
+                    Message.ShowInfo($"Добро пожаловать, {user.Email}!");
 
-                    MessageBox.Show($"Добро пожаловать, {user.Email}!", "Успех",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
-
-                    DataGrid dataGridWin = new DataGrid(userEmail);
-                    dataGridWin.Show();
-                    this.Close();
+                    if (user.Role == "superadmin")
+                    {
+                        UserGrid userGridWin = new UserGrid();
+                        userGridWin.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        DataGrid dataGridWin = new DataGrid(userEmail);
+                        dataGridWin.Show();
+                        this.Close();
+                    }
                 }
                 else
                 {
-                    ShowError("Неверный пароль");
+                    Message.ShowError("Неверный пароль");
                     _cts.Cancel();
                 }
             }
             catch (Exception ex)
             {
-                ShowError("Ошибка подключения к БД: " + ex.Message);
+                Message.ShowError($"Ошибка подключения к БД: {ex.Message}");
                 _cts.Cancel();
             }
         }
@@ -147,10 +158,6 @@ namespace SportsStoreLogin
 
                     login(parts[0], parts[1]);
                 }
-            }
-            else
-            {
-                ShowError("Нет файла сессии");
             }
         }
     }

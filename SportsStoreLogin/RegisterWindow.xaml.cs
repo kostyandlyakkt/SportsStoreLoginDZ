@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,38 +18,49 @@ namespace SportsStoreLogin
     public partial class RegisterWindow : Window
     {
         private StoreDBEntities1 db = new StoreDBEntities1();
+        private CancellationTokenSource _cts;
 
         public RegisterWindow()
         {
             InitializeComponent();
         }
 
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        private async void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            txtError.Text = "";
-            errorBorder.Visibility = Visibility.Collapsed;
+            _cts = new CancellationTokenSource();
+            var animationTask = Gui.loadAnimation(btnRegister, _cts.Token);
 
             string email = txtRegUsername.Text.Trim();
             string password = txtRegPassword.Password;
 
             if (string.IsNullOrWhiteSpace(email))
             {
-                ShowError("Введите email");
+                Message.ShowWarn("Введите email");
+                _cts.Cancel();
+                return;
+            }
+
+            if (!Validation.IsValidEmail(email)) 
+            {
+                Message.ShowError("Введите корректный email");
+                _cts.Cancel();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(password))
             {
-                ShowError("Введите пароль");
+                Message.ShowWarn("Введите пароль");
+                _cts.Cancel();
                 return;
             }
 
             try
             {
-                var existingUser = db.Users.FirstOrDefault(u => u.Email == email);
+                var existingUser = await Task.Run(() => db.Users.FirstOrDefault(u => u.Email == email));
                 if (existingUser != null)
                 {
-                    ShowError("Пользователь с таким email уже зарегистрирован");
+                    Message.ShowError("Пользователь с таким email уже зарегистрирован");
+                    _cts.Cancel();
                     return;
                 }
 
@@ -63,8 +75,9 @@ namespace SportsStoreLogin
                 db.Users.Add(newUser);
                 db.SaveChanges();
 
-                MessageBox.Show("Регистрация успешно завершена!", "Успех",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
+                _cts.Cancel();
+
+                Message.ShowInfo("Регистрация успешно завершена!");
 
                 LoginWindow loginWin = new LoginWindow();
                 loginWin.Show();
@@ -72,14 +85,16 @@ namespace SportsStoreLogin
             }
             catch (Exception ex)
             {
-                ShowError("Ошибка при сохранении: " + ex.Message);
+                Message.ShowError($"Ошибка при сохранении: {ex.Message}");
+                _cts.Cancel();
             }
         }
-
-        private void ShowError(string message)
+    
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            txtError.Text = message;
-            errorBorder.Visibility = Visibility.Visible;
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
         }
     }
 }
