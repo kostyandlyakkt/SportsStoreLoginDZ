@@ -304,49 +304,56 @@
                                     Background="White"
                                     BorderBrush="#DDD"
                                     BorderThickness="1"
-                                    Cursor="Hand">
+                                    Cursor="Hand"
+                                    Click="btnPrev_Click">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="3"/>
                                     </Style>
                                 </Button.Resources>
                             </Button>
-                            <Button Content="1" 
+                            <Button x:Name="leftBtn"
+                                    Content="1" 
                                     Width="35"
                                     Height="35"
                                     Margin="0,0,5,0"
                                     Background="#1E3C72"
                                     Foreground="White"
                                     BorderThickness="0"
-                                    Cursor="Hand">
+                                    Cursor="Hand"
+                                    Click="btnPage_Click">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="3"/>
                                     </Style>
                                 </Button.Resources>
                             </Button>
-                            <Button Content="2" 
+                            <Button x:Name="centreBtn"
+                                    Content="2" 
                                     Width="35"
                                     Height="35"
                                     Margin="0,0,5,0"
                                     Background="White"
                                     BorderBrush="#DDD"
                                     BorderThickness="1"
-                                    Cursor="Hand">
+                                    Cursor="Hand"
+                                    Click="btnPage_Click">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="3"/>
                                     </Style>
                                 </Button.Resources>
                             </Button>
-                            <Button Content="3" 
+                            <Button x:Name="rightBtn"
+                                    Content="3" 
                                     Width="35"
                                     Height="35"
                                     Margin="0,0,5,0"
                                     Background="White"
                                     BorderBrush="#DDD"
                                     BorderThickness="1"
-                                    Cursor="Hand">
+                                    Cursor="Hand"
+                                    Click="btnPage_Click">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="3"/>
@@ -359,7 +366,8 @@
                                     Background="White"
                                     BorderBrush="#DDD"
                                     BorderThickness="1"
-                                    Cursor="Hand">
+                                    Cursor="Hand"
+                                    Click="btnNext_Click">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="3"/>

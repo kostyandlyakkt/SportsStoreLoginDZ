@@ -20,6 +20,10 @@ namespace SportsStoreLogin
     {
         private StoreDBEntities1 db = new StoreDBEntities1();
 
+        private int currentPage = 1;
+        private int pageSize = 10;
+        private int totalItems = 0;
+
         public DataGrid(String username = "Администратор")
         {
             InitializeComponent();
@@ -31,24 +35,30 @@ namespace SportsStoreLogin
         {
             try
             {
-                var productsList = db.Products.Select(p => new
-                {
-                    p.Id,
-                    p.Name,
-                    Category = p.Categories.Name,
-                    p.Price,
-                    p.Quantity,
-                    p.Status,
-                    p.AddedDate
-                }).ToList();
+                totalItems = db.Products.Count();
+
+                var productsList = db.Products
+                    .OrderBy(p => p.Id)
+                    .Skip((currentPage - 1) * pageSize)
+                    .Take(pageSize)
+                    .Select(p => new
+                    {
+                        p.Id,
+                        p.Name,
+                        Category = p.Categories.Name,
+                        p.Price,
+                        p.Quantity,
+                        p.Status,
+                        p.AddedDate
+                    }).ToList();
 
                 dgProducts.ItemsSource = productsList;
 
-                txtTotalItems.Text = productsList.Count.ToString();
+                txtTotalItems.Text = totalItems.ToString();
             }
             catch (Exception ex)
             {
-                Message.ShowError($"Ошибка загрузки данных: {ex.Message}");
+                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}");
             }
         }
 
@@ -119,6 +129,77 @@ namespace SportsStoreLogin
             ProductWindow editWin = new ProductWindow(productId);
             editWin.Show();
             this.Close();
+        }
+
+        private void btnPrev_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+
+                int page = int.Parse(leftBtn.Content.ToString());
+                leftBtn.Content = page - 1;
+                centreBtn.Content = page;
+                rightBtn.Content = page + 1;
+
+                checkLimit();
+                LoadData();
+            }
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage * pageSize < totalItems)
+            {
+                currentPage++;
+
+                int page = int.Parse(leftBtn.Content.ToString());
+                leftBtn.Content = page + 1;
+                centreBtn.Content = page + 2;
+                rightBtn.Content = page + 3;
+
+                if (page + 1 * pageSize > totalItems)
+                {
+                    centreBtn.Content = 1;
+                    rightBtn.Content = 2;
+                }
+
+                checkLimit();
+                LoadData();
+            }
+        }
+
+        private void btnPage_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            int page = int.Parse(btn.Content.ToString());
+
+            leftBtn.Content = page;
+            centreBtn.Content = page + 1;
+            rightBtn.Content = page + 2;
+            if (page * pageSize > totalItems)
+            {
+                centreBtn.Content = 1;
+                rightBtn.Content = 2;
+            }
+
+            currentPage = page;
+            
+            checkLimit();
+            LoadData();
+        }
+
+        private void checkLimit()
+        {
+            if (int.Parse(centreBtn.Content.ToString()) * pageSize - totalItems > pageSize)
+            {
+                centreBtn.Content = 1;
+                rightBtn.Content = 2;
+            }
+            else if(int.Parse(rightBtn.Content.ToString()) * pageSize - totalItems > pageSize)
+            {
+                rightBtn.Content = 1;
+            }
         }
     }
 
